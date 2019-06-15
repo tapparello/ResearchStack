@@ -1,14 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'me.tatarka.retrolambda'
+//apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.jfrog.bintray'
 
 version = '1.1.2'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 28
 
     lintOptions {
         warning "InvalidPackage"
@@ -16,7 +15,7 @@ android {
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 28
         versionCode 6
         versionName version
     }
@@ -69,16 +68,27 @@ ext {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar', '*.so'])
-    compile 'com.cronutils:cron-utils:3.1.2'
-    compile project(':backbone')
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.0'
-    testCompile 'org.mockito:mockito-core:1.10.19'
-    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta3'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.0.0-RC1'
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.so'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.android.support:preference-v14:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:support-compat:28.0.0'
+    implementation 'com.cronutils:cron-utils:3.1.2'
+    implementation 'com.android.support:support-annotations:28.0.0'
+    api project(':backbone')
+    implementation 'com.jakewharton.rxbinding:rxbinding:0.2.0'
+    implementation 'com.jakewharton.rxbinding:rxbinding-support-v4:0.2.0'
+    implementation 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.2.0'
+    implementation 'com.jakewharton.rxbinding:rxbinding-design:0.2.0'
+    implementation 'co.touchlab.squeaky:squeaky-query:0.4.0.0'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.robolectric:robolectric:3.0'
+    testImplementation 'org.mockito:mockito-core:1.10.19'
+    implementation 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta3'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.0.0-RC1'
 
 }
 

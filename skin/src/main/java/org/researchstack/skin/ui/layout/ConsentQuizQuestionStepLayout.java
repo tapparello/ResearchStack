@@ -109,7 +109,6 @@ public class ConsentQuizQuestionStepLayout extends LinearLayout implements StepL
         }
     }
 
-    @NonNull
     private List<Choice<String>> getChoices(ConsentQuizModel.QuizQuestion question) {
         List<Choice<String>> choices = new ArrayList<>();
 

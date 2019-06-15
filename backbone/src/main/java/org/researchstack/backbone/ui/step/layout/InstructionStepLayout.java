@@ -74,7 +74,8 @@ public class InstructionStepLayout extends FixedSubmitBarLayout implements StepL
             if (!TextUtils.isEmpty(step.getText())) {
                 TextView summary = (TextView) findViewById(R.id.rsb_intruction_text);
                 summary.setVisibility(View.VISIBLE);
-                summary.setText(Html.fromHtml(step.getText()));
+//                summary.setText(Html.fromHtml(step.getText()));
+                summary.setText(step.getText());
                 summary.setMovementMethod(new TextViewLinkHandler() {
                     @Override
                     public void onLinkClick(String url) {
