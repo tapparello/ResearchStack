@@ -183,7 +183,7 @@ if (project.hasProperty("android")) { // Android libraries
     afterEvaluate {
         javadoc.classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
         javadoc.classpath += files(android.libraryVariants.collect { variant ->
-            variant.javaCompile.classpath.files
+            variant.javaCompileProvider.get().classpath.files
         })
     }
 } else { // Java libraries
