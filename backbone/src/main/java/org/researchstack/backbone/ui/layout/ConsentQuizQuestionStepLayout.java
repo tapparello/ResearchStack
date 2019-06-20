@@ -107,20 +107,6 @@ public class ConsentQuizQuestionStepLayout extends LinearLayout implements StepL
             submitBar.setPositiveAction(v -> onSubmit());
         }
 
-<<<<<<< HEAD:skin/src/main/java/org/researchstack/skin/ui/layout/ConsentQuizQuestionStepLayout.java
-    private List<Choice<String>> getChoices(ConsentQuizModel.QuizQuestion question) {
-        List<Choice<String>> choices = new ArrayList<>();
-
-        if (question.getType().equals("boolean")) {
-            // json expected answer is a string of either "true" or "false"
-            choices.add(new Choice<>(getContext().getString(R.string.rss_btn_true), "true"));
-            choices.add(new Choice<>(getContext().getString(R.string.rss_btn_false), "false"));
-        } else if (question.getType().equals("singleChoiceText")) {
-            // json expected answer is a string of the index ("0" for the first choice)
-            List<String> textChoices = question.getTextChoices();
-            for (int i = 0; i < textChoices.size(); i++) {
-                choices.add(new Choice<>(textChoices.get(i), String.valueOf(i)));
-=======
         List<Choice> choices = ConsentQuizQuestionUtils.createChoices(getContext(), question);
         for(Choice<String> choice : choices)
         {
@@ -134,7 +120,6 @@ public class ConsentQuizQuestionStepLayout extends LinearLayout implements StepL
             if(question.getExpectedAnswer().equals(String.valueOf(choice.getValue())))
             {
                 expectedChoice = choice;
->>>>>>> temp:backbone/src/main/java/org/researchstack/backbone/ui/layout/ConsentQuizQuestionStepLayout.java
             }
         }
     }
