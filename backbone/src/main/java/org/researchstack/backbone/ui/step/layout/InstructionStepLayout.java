@@ -131,24 +131,6 @@ public class InstructionStepLayout extends FixedSubmitBarLayout implements StepL
             }
 
             // Set Summary
-<<<<<<< HEAD
-            if (!TextUtils.isEmpty(step.getText())) {
-                TextView summary = (TextView) findViewById(R.id.rsb_intruction_text);
-                summary.setVisibility(View.VISIBLE);
-//                summary.setText(Html.fromHtml(step.getText()));
-                summary.setText(step.getText());
-                summary.setMovementMethod(new TextViewLinkHandler() {
-                    @Override
-                    public void onLinkClick(String url) {
-                        String path = ResourcePathManager.getInstance().
-                                generateAbsolutePath(ResourcePathManager.Resource.TYPE_HTML, url);
-                        Intent intent = ViewWebDocumentActivity.newIntentForPath(getContext(),
-                                step.getTitle(),
-                                path);
-                        getContext().startActivity(intent);
-                    }
-                });
-=======
             if(! TextUtils.isEmpty(text)) {
                 textTextView.setVisibility(View.VISIBLE);
 
@@ -171,7 +153,6 @@ public class InstructionStepLayout extends FixedSubmitBarLayout implements StepL
                         }
                     });
                 }
->>>>>>> temp
             }
 
             // Set Next / Skip
