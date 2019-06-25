@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/rsb_survey_title"
-        style="@style/Backbone.Survey.Title"
+        style="@style/Backbone.Survey.Subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
