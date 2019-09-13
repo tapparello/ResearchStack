@@ -8,6 +8,7 @@ import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,6 +132,7 @@ public class FormStepLayout extends FixedSubmitBarLayout implements StepLayout {
                 this.stepResult = new StepResult<>(formStep);
             } else {
                 for (Object resultObj : stepResult.getResults().values()) {
+                    Log.d("ResearchStackResult", resultObj.getClass().getName());
                     if (!(resultObj instanceof StepResult)) {
                         throw new RuntimeException("StepResult must be StepResult<StepResult>");
                     }
