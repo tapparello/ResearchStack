@@ -42,7 +42,6 @@ public class VideoInstructionStepLayout extends FixedSubmitBarLayout implements 
     protected StepCallbacks callbacks;
 
     protected VideoInstructionStep videoInstructionStep;
-    protected Step step;
 
     protected TextView titleTextView;
     protected TextView  textTextView;
@@ -82,7 +81,6 @@ public class VideoInstructionStepLayout extends FixedSubmitBarLayout implements 
             throw new IllegalStateException("InstructionStepLayout only works with InstructionStep");
         }
         this.videoInstructionStep = (VideoInstructionStep)step;
-        this.step = step;
     }
 
     @Override
@@ -92,7 +90,7 @@ public class VideoInstructionStepLayout extends FixedSubmitBarLayout implements 
 
     @Override
     public boolean isBackEventConsumed() {
-        callbacks.onSaveStep(StepCallbacks.ACTION_PREV, step, null);
+        callbacks.onSaveStep(StepCallbacks.ACTION_PREV, videoInstructionStep, null);
         return false;
     }
 
@@ -116,9 +114,9 @@ public class VideoInstructionStepLayout extends FixedSubmitBarLayout implements 
     }
 
     public void refreshStep() {
-        if (step != null) {
-            String title = step.getTitle();
-            String text  = step.getText();
+        if (videoInstructionStep != null) {
+            String title = videoInstructionStep.getTitle();
+            String text  = videoInstructionStep.getText();
 
             // Set Title
             if (! TextUtils.isEmpty(title)) {
@@ -162,17 +160,17 @@ public class VideoInstructionStepLayout extends FixedSubmitBarLayout implements 
                             videoInstructionStep.getSubmitBarNegativeActionSkipRule();
                     submitBar.setNegativeTitle(rule.getTitle());
                     submitBar.setNegativeAction(v -> {
-                        StepResult stepResult = new StepResult(step);
+                        StepResult stepResult = new StepResult(videoInstructionStep);
                         rule.onNegativeActionClicked(videoInstructionStep, stepResult);
                         if (callbacks != null) {
-                            callbacks.onSaveStep(StepCallbacks.ACTION_NEXT, step, stepResult);
+                            callbacks.onSaveStep(StepCallbacks.ACTION_NEXT, videoInstructionStep, stepResult);
                         }
                     });
-                } else if (step.isOptional()) {
+                } else if (videoInstructionStep.isOptional()) {
                     submitBar.setNegativeTitle(R.string.rsb_step_skip);
                     submitBar.setNegativeAction(v -> {
                         if (callbacks != null) {
-                            callbacks.onSaveStep(StepCallbacks.ACTION_NEXT, step, null);
+                            callbacks.onSaveStep(StepCallbacks.ACTION_NEXT, videoInstructionStep, null);
                         }
                     });
                 } else {
@@ -184,6 +182,8 @@ public class VideoInstructionStepLayout extends FixedSubmitBarLayout implements 
             if (moreDetailTextView != null) {
                 refreshDetailText(videoInstructionStep.getMoreDetailText(), moreDetailTextView.getCurrentTextColor());
             }
+
+
         }
     }
 
@@ -225,7 +225,7 @@ public class VideoInstructionStepLayout extends FixedSubmitBarLayout implements 
      * Play video when the image is clicked.
      */
     public void playVideo(View view) {
-        Log.d(LOG_TAG, "Playing video!");
+        Log.d(LOG_TAG, videoInstructionStep + " - Playing video " + videoInstructionStep.getVideo());
 
         String path = videoInstructionStep.getVideo();
 
@@ -233,11 +233,10 @@ public class VideoInstructionStepLayout extends FixedSubmitBarLayout implements 
         intent.setDataAndType(Uri.parse(path), "video/*");
         view.getContext().startActivity(intent);
 
-
     }
 
     protected void onComplete() {
-        callbacks.onSaveStep(StepCallbacks.ACTION_NEXT, step, null);
+        callbacks.onSaveStep(StepCallbacks.ACTION_NEXT, videoInstructionStep, null);
     }
 
 }

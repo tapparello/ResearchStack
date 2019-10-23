@@ -1,5 +1,6 @@
 package org.researchstack.backbone.step;
 
+import android.util.Log;
 import android.widget.ImageView;
 
 import org.researchstack.backbone.result.StepResult;
@@ -18,6 +19,8 @@ import java.util.Map;
  */
 
 public class VideoInstructionStep extends Step implements NavigableOrderedTask.NavigationRule {
+
+    private static final String LOG_TAG = VideoInstructionStep.class.getCanonicalName();
 
     /*
      * Additional detailed text to display
@@ -102,6 +105,7 @@ public class VideoInstructionStep extends Step implements NavigableOrderedTask.N
     }
 
     public void setVideo(String newVideo) {
+        Log.d(LOG_TAG, this + " - Video URL set to: " + newVideo);
         video = newVideo;
     }
     public String getVideo() {
