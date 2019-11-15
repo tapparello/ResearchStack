@@ -105,7 +105,7 @@ public class VideoInstructionStep extends Step implements NavigableOrderedTask.N
     }
 
     public void setVideo(String newVideo) {
-        Log.d(LOG_TAG, this + " - Video URL set to: " + newVideo);
+        //Log.d(LOG_TAG, this + " - Video URL set to: " + newVideo);
         video = newVideo;
     }
     public String getVideo() {
