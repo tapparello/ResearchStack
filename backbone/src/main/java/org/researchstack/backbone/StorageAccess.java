@@ -152,6 +152,11 @@ public class StorageAccess {
     public void requestStorageAccess(Context context) {
         UiThreadContext.assertUiThread();
 
+        if (encryptionProvider == null) {
+            notifyReady();
+            return;
+        }
+
         if (encryptionProvider.needsAuth(context, pinCodeConfig)) {
             // just need to re-auth
             notifySoftFail();
