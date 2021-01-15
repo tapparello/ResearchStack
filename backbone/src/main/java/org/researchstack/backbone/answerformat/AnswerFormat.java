@@ -1,5 +1,9 @@
 package org.researchstack.backbone.answerformat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import org.researchstack.backbone.ui.step.body.DateQuestionBody;
 import org.researchstack.backbone.ui.step.body.DecimalQuestionBody;
 import org.researchstack.backbone.ui.step.body.DurationQuestionBody;
@@ -24,6 +28,22 @@ import java.io.Serializable;
  * question step or form item. Incorporate the resulting step into a task, and present the task with
  * a {@link org.researchstack.backbone.ui.ViewTaskActivity}.
  */
+
+//@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonTypeInfo(use = JsonTypeInfo.Id.CUSTOM, include = JsonTypeInfo.As.PROPERTY, property = "inputType")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION)
+@JsonSubTypes({
+        @JsonSubTypes.Type(IntegerAnswerFormat.class),
+        @JsonSubTypes.Type(ChoiceAnswerFormat.class),
+        @JsonSubTypes.Type(DateAnswerFormat.class),
+        @JsonSubTypes.Type(DecimalAnswerFormat.class),
+        @JsonSubTypes.Type(DurationAnswerFormat.class),
+        @JsonSubTypes.Type(FormAnswerFormat.class),
+        @JsonSubTypes.Type(ImageChoiceAnswerFormat.class),
+        @JsonSubTypes.Type(TextAnswerFormat.class),
+}
+)
 public abstract class AnswerFormat implements Serializable {
     /* Default constructor needed for serialization/deserialization of object */
     public AnswerFormat() {

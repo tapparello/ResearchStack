@@ -107,7 +107,15 @@ public class FormStepLayout extends FixedSubmitBarLayout implements StepLayout {
         initStepLayout(formStep);
         // Fill up the step map
         for (QuestionStep subStep : questionSteps) {
+
+            Log.d("initialize", subStep.getIdentifier());
+
             StepResult subStepResult = StepResultHelper.findStepResult(stepResult, subStep.getIdentifier());
+
+            if (subStepResult != null) {
+                Log.d("initialize", subStepResult.toString());
+            }
+
             StepBody stepBody = SurveyStepLayout.createStepBody(subStep, subStepResult);
             View surveyStepView = initStepBodyHolder(layoutInflater, stepBodyContainer, subStep, stepBody);
             subQuestionStepData.add(new FormStepData(subStep, stepBody, surveyStepView));
@@ -131,12 +139,14 @@ public class FormStepLayout extends FixedSubmitBarLayout implements StepLayout {
             if (stepResult == null || stepResult.getResults() == null || stepResult.getResults().isEmpty()) {
                 this.stepResult = new StepResult<>(formStep);
             } else {
-                for (Object resultObj : stepResult.getResults().values()) {
-                    Log.d("ResearchStackResult", resultObj.getClass().getName());
-                    if (!(resultObj instanceof StepResult)) {
-                        throw new RuntimeException("StepResult must be StepResult<StepResult>");
-                    }
-                }
+                Log.d("validateStepAndResult", stepResult.getResults().toString());
+//                for (Object resultObj : stepResult.getResults().values()) {
+//                    Log.d("ResearchStackResult", resultObj.toString());
+//                    Log.d("ResearchStackResult", resultObj.getClass().getName());
+//                    if (!(resultObj instanceof StepResult)) {
+//                        throw new RuntimeException("StepResult must be StepResult<StepResult>");
+//                    }
+//                }
                 this.stepResult = stepResult;
             }
         }

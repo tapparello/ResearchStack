@@ -3,6 +3,7 @@ package org.researchstack.backbone.ui.step.body;
 import android.content.Context;
 import android.content.res.Resources;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class IntegerQuestionBody implements StepBody {
     // Constructor Fields
     //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
     protected QuestionStep step;
-    protected StepResult<Integer> result;
+    protected StepResult<Double> result;
     protected IntegerAnswerFormat format;
 
     //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -110,7 +111,7 @@ public class IntegerQuestionBody implements StepBody {
         editText.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
 
         if (result.getResult() != null) {
-            editText.setText(String.valueOf(result.getResult()));
+            editText.setText(String.valueOf(result.getResult().intValue()));
         }
 
         String minStr = Integer.toString(minValue);
@@ -128,7 +129,7 @@ public class IntegerQuestionBody implements StepBody {
         } else {
             String numString = editText.getText().toString();
             if (!TextUtils.isEmpty(numString)) {
-                result.setResult(Integer.valueOf(editText.getText().toString()));
+                result.setResult(Double.valueOf(editText.getText().toString()));
             }
         }
 

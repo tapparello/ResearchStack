@@ -1,5 +1,7 @@
 package org.researchstack.backbone.utils;
 
+import android.util.Log;
+
 import org.researchstack.backbone.result.Result;
 import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.result.TaskResult;
@@ -8,6 +10,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Created by TheMDP on 1/16/17.
@@ -21,6 +25,9 @@ public class StepResultHelper {
      * @return a StepResult object within taskResult that has map key stepResultKey, null otherwise
      */
     public static StepResult findStepResult(TaskResult taskResult, String stepResultKey) {
+
+        Log.d("findStepResult", taskResult.toString() + " - " + stepResultKey);
+
         if (taskResult == null || taskResult.getResults() == null || stepResultKey == null) {
             return null;
         }
@@ -36,7 +43,11 @@ public class StepResultHelper {
         if (stepResultList == null || stepResultKey == null) {
             return null;
         }
+
+        Log.d("findStepResult", stepResultList.toString());
+
         for (StepResult stepResult : stepResultList) {
+            Log.d("findStepResult", stepResult.toString());
             StepResult foundResult = findStepResult(stepResult, stepResultKey);
             if (foundResult != null) {
                 return foundResult;
@@ -70,6 +81,9 @@ public class StepResultHelper {
      * @return a StepResult object within result that has map key stepResultKey, null otherwise
      */
     public static StepResult findStepResult(StepResult result, String stepResultKey) {
+
+        Log.d("findStepResult 1", result.toString() + " - " + stepResultKey);
+
         if (result == null || stepResultKey == null) {
             return null;
         }
@@ -77,10 +91,19 @@ public class StepResultHelper {
             return result;
         }
         Map results = result.getResults();
+
+        Log.d("findStepResult 2", results.toString());
+
         for (Object stepId : results.keySet()) {
             Object stepResultObj = results.get(stepId);
-            if (stepResultObj instanceof StepResult) {
-                StepResult stepResult = (StepResult)stepResultObj;
+            Log.d("findStepResult 3", stepResultObj.toString());
+
+            ObjectMapper mapper = new ObjectMapper();
+
+            StepResult stepResult = mapper.convertValue(stepResultObj, StepResult.class);
+
+            if (stepResult instanceof StepResult) {
+                //StepResult stepResult = (StepResult)stepResultObj;
                 if (stepResultKey.equals(stepId)) {
                     return stepResult;
                 } else {

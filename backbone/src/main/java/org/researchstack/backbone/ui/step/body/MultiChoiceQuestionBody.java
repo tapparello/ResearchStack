@@ -3,6 +3,8 @@ package org.researchstack.backbone.ui.step.body;
 import android.content.res.Resources;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.widget.AppCompatCheckBox;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +19,11 @@ import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.step.QuestionStep;
 import org.researchstack.backbone.step.Step;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MultiChoiceQuestionBody<T> implements StepBody {
@@ -40,10 +45,29 @@ public class MultiChoiceQuestionBody<T> implements StepBody {
         // Restore results
         currentSelected = new HashSet<>();
 
-        T[] resultArray = this.result.getResult();
-        if (resultArray != null && resultArray.length > 0) {
-            currentSelected.addAll(Arrays.asList(resultArray));
+        if (this.result.getResult() != null) {
+            Log.d("MultiChoiceQuestionBody", result.getResult().toString() + " ++++ " + result.getResult().getClass().toString()) ;
+
+            String string = result.getResult().toString().replace("[", "");
+            string = string.replace("]","");
+            string = string.replace(" ","");
+
+            Log.d("MultiChoiceQuestionBody", string) ;
+
+            Collection list = new ArrayList<>(Arrays.asList(string.split(",")));
+            Log.d("MultiChoiceQuestionBody", list.toString()) ;
+
+            currentSelected.addAll(list);
+
+            Log.d("MultiChoiceQuestionBody", currentSelected.toString()) ;
         }
+
+//        T[] resultArray = this.result.getResult();
+//        if (resultArray != null && resultArray.length > 0) {
+//            currentSelected.addAll(Arrays.asList(resultArray));
+//        }
+
+
     }
 
     @Override

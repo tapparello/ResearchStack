@@ -211,6 +211,7 @@ public class SurveyStepLayout extends FixedSubmitBarLayout implements StepLayout
         }
         catch(Exception e)
         {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
