@@ -100,19 +100,27 @@ public class StepResultHelper {
 
             ObjectMapper mapper = new ObjectMapper();
 
-            StepResult stepResult = mapper.convertValue(stepResultObj, StepResult.class);
+            try {
+                StepResult stepResult = mapper.convertValue(stepResultObj, StepResult.class);
 
-            if (stepResult instanceof StepResult) {
-                //StepResult stepResult = (StepResult)stepResultObj;
-                if (stepResultKey.equals(stepId)) {
-                    return stepResult;
-                } else {
-                    StepResult recursiveStepResult = findStepResult(stepResult, stepResultKey);
-                    if (recursiveStepResult != null) {
-                        return recursiveStepResult;
+                if (stepResult instanceof StepResult) {
+                    //StepResult stepResult = (StepResult)stepResultObj;
+                    if (stepResultKey.equals(stepId)) {
+                        return stepResult;
+                    } else {
+                        StepResult recursiveStepResult = findStepResult(stepResult, stepResultKey);
+                        if (recursiveStepResult != null) {
+                            return recursiveStepResult;
+                        }
                     }
                 }
+
+            } catch (Exception e){
+                e.printStackTrace();
             }
+
+
+
         }
         return null;
     }

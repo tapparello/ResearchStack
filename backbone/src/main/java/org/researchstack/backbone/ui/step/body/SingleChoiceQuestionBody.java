@@ -2,6 +2,8 @@ package org.researchstack.backbone.ui.step.body;
 
 import android.content.res.Resources;
 import androidx.core.content.ContextCompat;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +35,16 @@ public class SingleChoiceQuestionBody<T> implements StepBody {
         this.format = (ChoiceAnswerFormat) this.step.getAnswerFormat();
         this.choices = format.getChoices();
 
+        if (result != null) {
+            Log.d("SingleChoiceQBody", result.toString());
+        }
+
         // Restore results
         T resultValue = this.result.getResult();
         if (resultValue != null) {
+            Log.d("SingleChoiceQBody", resultValue.toString());
             for (Choice<T> choice : choices) {
+                Log.d("SingleChoiceQBody", choice.getValue().toString());
                 if (choice.getValue().equals(resultValue)) {
                     currentSelected = choice.getValue();
                 }

@@ -34,13 +34,13 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION)
 @JsonSubTypes({
-        @JsonSubTypes.Type(IntegerAnswerFormat.class),
+        //@JsonSubTypes.Type(IntegerAnswerFormat.class),
         @JsonSubTypes.Type(ChoiceAnswerFormat.class),
-        @JsonSubTypes.Type(DateAnswerFormat.class),
-        @JsonSubTypes.Type(DecimalAnswerFormat.class),
-        @JsonSubTypes.Type(DurationAnswerFormat.class),
+//        @JsonSubTypes.Type(DateAnswerFormat.class),
+        //@JsonSubTypes.Type(DecimalAnswerFormat.class),
+//        @JsonSubTypes.Type(DurationAnswerFormat.class),
         @JsonSubTypes.Type(FormAnswerFormat.class),
-        @JsonSubTypes.Type(ImageChoiceAnswerFormat.class),
+//        @JsonSubTypes.Type(ImageChoiceAnswerFormat.class),
         @JsonSubTypes.Type(TextAnswerFormat.class),
 }
 )

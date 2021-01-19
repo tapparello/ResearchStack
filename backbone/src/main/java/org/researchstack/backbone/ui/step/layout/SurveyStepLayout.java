@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import android.text.Html;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -206,6 +207,9 @@ public class SurveyStepLayout extends FixedSubmitBarLayout implements StepLayout
         try
         {
             Class cls = questionStep.getStepBodyClass();
+
+            Log.d("createStepBody", cls.getCanonicalName());
+
             Constructor constructor = cls.getConstructor(Step.class, StepResult.class);
             return (StepBody) constructor.newInstance(questionStep, result);
         }

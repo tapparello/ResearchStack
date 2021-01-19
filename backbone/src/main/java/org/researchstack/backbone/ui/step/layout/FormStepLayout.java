@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.researchstack.backbone.R;
 import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.step.FormStep;
@@ -135,18 +137,21 @@ public class FormStepLayout extends FixedSubmitBarLayout implements StepLayout {
         if(step != null && step instanceof FormStep)
         {
             formStep = (FormStep)step;
+            ObjectMapper mapper = new ObjectMapper();
 
             if (stepResult == null || stepResult.getResults() == null || stepResult.getResults().isEmpty()) {
                 this.stepResult = new StepResult<>(formStep);
             } else {
                 Log.d("validateStepAndResult", stepResult.getResults().toString());
-//                for (Object resultObj : stepResult.getResults().values()) {
-//                    Log.d("ResearchStackResult", resultObj.toString());
-//                    Log.d("ResearchStackResult", resultObj.getClass().getName());
-//                    if (!(resultObj instanceof StepResult)) {
-//                        throw new RuntimeException("StepResult must be StepResult<StepResult>");
-//                    }
-//                }
+                for (Object resultObjRaw : stepResult.getResults().values()) {
+                    Log.d("ResearchStackResult", resultObjRaw.toString());
+
+                    StepResult resultObj = mapper.convertValue(resultObjRaw, StepResult.class);
+                    Log.d("ResearchStackResult", resultObj.getClass().getName());
+                    if (!(resultObj instanceof StepResult)) {
+                        throw new RuntimeException("StepResult must be StepResult<StepResult>");
+                    }
+                }
                 this.stepResult = stepResult;
             }
         }
