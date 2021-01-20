@@ -1,5 +1,6 @@
 package org.researchstack.backbone.answerformat;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -18,6 +19,8 @@ import org.researchstack.backbone.ui.step.body.TextQuestionBody;
 
 import java.io.Serializable;
 
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION;
+
 /**
  * The AnswerFormat class is the abstract base class for classes that describe the format in which a
  * survey question should be answered. The ResearchStack framework uses {@link
@@ -29,10 +32,15 @@ import java.io.Serializable;
  * a {@link org.researchstack.backbone.ui.ViewTaskActivity}.
  */
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
-//@JsonTypeInfo(use = JsonTypeInfo.Id.CUSTOM, include = JsonTypeInfo.As.PROPERTY, property = "inputType")
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION)
+//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "inputType")
+//@JsonSubTypes({
+//        @JsonSubTypes.Type(value = IntegerAnswerFormat.class, name = "2.0"),
+//        @JsonSubTypes.Type(value = ChoiceAnswerFormat.class, name = "3.0")
+//})
+
+@JsonTypeInfo(use = DEDUCTION)
+@JsonAutoDetect(fieldVisibility=JsonAutoDetect.Visibility.ANY)
 @JsonSubTypes({
         //@JsonSubTypes.Type(IntegerAnswerFormat.class),
         @JsonSubTypes.Type(ChoiceAnswerFormat.class),

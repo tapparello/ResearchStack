@@ -9,6 +9,8 @@ import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
@@ -78,6 +80,7 @@ public class ViewTaskActivity extends PinCodeActivity implements StepCallbacks
             // Grab the existing task result if it is available, otherwise make a new one
             if (getIntent().hasExtra(EXTRA_TASK_RESULT)) {
                 taskResult = (TaskResult) getIntent().getSerializableExtra(EXTRA_TASK_RESULT);
+                Log.d("TaskResult", taskResult.getResults().toString());
             } else {
                 taskResult = new TaskResult(task.getIdentifier());
             }
