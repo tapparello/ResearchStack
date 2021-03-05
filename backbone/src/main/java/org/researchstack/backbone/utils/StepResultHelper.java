@@ -82,7 +82,7 @@ public class StepResultHelper {
      */
     public static StepResult findStepResult(StepResult result, String stepResultKey) {
 
-        Log.d("findStepResult 1", result.toString() + " - " + stepResultKey);
+//        Log.d("findStepResult 1", result.toString() + " - " + stepResultKey);
 
         if (result == null || stepResultKey == null) {
             return null;
@@ -92,11 +92,11 @@ public class StepResultHelper {
         }
         Map results = result.getResults();
 
-        Log.d("findStepResult 2", results.toString());
+//        Log.d("findStepResult 2", results.toString());
 
         for (Object stepId : results.keySet()) {
             Object stepResultObj = results.get(stepId);
-            Log.d("findStepResult 3", stepResultObj.toString());
+//            Log.d("findStepResult 3", stepResultObj.toString());
 
             ObjectMapper mapper = new ObjectMapper();
 
@@ -116,7 +116,7 @@ public class StepResultHelper {
                 }
 
             } catch (Exception e){
-                e.printStackTrace();
+                //e.printStackTrace();
             }
 
 
